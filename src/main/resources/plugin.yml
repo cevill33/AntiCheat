@@ -1,0 +1,10 @@
+name: AntiCheat
+author: cevill33
+version: 1.0
+main: me.anticheat.Main
+
+commands:
+  ban:
+  unban:
+  mute:
+  chatreport:
