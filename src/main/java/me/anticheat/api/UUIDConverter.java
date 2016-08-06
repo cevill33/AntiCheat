@@ -79,7 +79,7 @@ public class UUIDConverter {
         try {
             HttpURLConnection connection = (HttpURLConnection) new URL(String.format(UUID_URL, name, timestamp/1000)).openConnection();
             connection.setReadTimeout(5000);
-            UUIDFetcher data = gson.fromJson(new BufferedReader(new InputStreamReader(connection.getInputStream())), UUIDFetcher.class);
+            UUIDConverter data = gson.fromJson(new BufferedReader(new InputStreamReader(connection.getInputStream())), UUIDFetcher.class);
 
             uuidCache.put(name, data.id);
             nameCache.put(data.id, data.name);
@@ -113,8 +113,8 @@ public class UUIDConverter {
         try {
             HttpURLConnection connection = (HttpURLConnection) new URL(String.format(NAME_URL, UUIDTypeAdapter.fromUUID(uuid))).openConnection();
             connection.setReadTimeout(5000);
-            UUIDFetcher[] nameHistory = gson.fromJson(new BufferedReader(new InputStreamReader(connection.getInputStream())), UUIDFetcher[].class);
-            UUIDFetcher currentNameData = nameHistory[nameHistory.length - 1];
+            UUIDConverter[] nameHistory = gson.fromJson(new BufferedReader(new InputStreamReader(connection.getInputStream())), UUIDConverter[].class);
+            UUIDConverter currentNameData = nameHistory[nameHistory.length - 1];
             uuidCache.put(currentNameData.name.toLowerCase(), uuid);
             nameCache.put(uuid, currentNameData.name);
             return currentNameData.name;
